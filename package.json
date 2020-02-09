@@ -23,6 +23,7 @@
     "typescript": "3.7.4"
   },
   "scripts": {
+    "echo": "echo aaaa",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
