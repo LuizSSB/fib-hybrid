@@ -1,15 +1,11 @@
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import React, { useState } from 'react';
-import NameSetter from './NameSetter';
-import NameList from './NameList';
+import NameSetter from '../components/NameSetter';
+import NameList from '../components/NameList';
+import ContextualNameSetter from '../components/ContextualNameSetter';
+import ContextualNameList from '../components/ContextuaNameList'
 
 const Home: React.FC = () => {
-  const [names, setNames] = useState<string[]>([])
-  const addName = (name: string) => {
-    const newNames = [name, ...names]
-    setNames(newNames)
-  }
-  
   return (
     <IonPage>
       <IonHeader>
@@ -18,22 +14,11 @@ const Home: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding">
-        <NameSetter
+        <ContextualNameSetter 
           initialValue="Meu nome é"
           placeholder="Seu nome"
-          buttonTitle="Definir seu nome"
-          onNameSet={addName} />
-        <NameSetter
-          initialValue="Sua mãe é"
-          placeholder="Nome da sua mãe"
-          buttonTitle="Definir sua mãe"
-          onNameSet={(n) => addName(n)} />
-        <NameSetter
-          initialValue="Seu pai é"
-          placeholder="Nome do seu pai"
-          buttonTitle="Definir seu pai"
-          onNameSet={addName} />
-        <NameList names={names} />
+          buttonTitle="Definir seu nome" />
+        <ContextualNameList />
       </IonContent>
     </IonPage>
   );

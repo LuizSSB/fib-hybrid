@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
 import { IonText, IonInput, IonButton } from '@ionic/react'
 
-type NameSetterProps = {
+export type NameSetterProps = {
     initialValue: string
     placeholder: string
     buttonTitle: string

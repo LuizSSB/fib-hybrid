@@ -1,5 +1,7 @@
 {
   "name": "AulaFib",
-  "integrations": {},
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "react"
 }
