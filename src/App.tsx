@@ -1,6 +1,6 @@
 import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
-import { IonApp, IonRouterOutlet } from '@ionic/react';
+import { IonApp, IonRouterOutlet, IonSplitPane, IonPage } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import Home from './pages/Home';
 
@@ -23,18 +23,32 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 import { AppContextProvider } from './contexts/AppContext';
+import ListPage from './pages/ListPage';
+import InsertPage from './pages/InsertPage';
+import UpdatePage from './pages/UpdatePage';
+import TabsPage from './pages/TabsPage';
+import MenuPage from './pages/MenuPage';
 
 class App extends React.Component {
   render() {
     return (
       <IonApp>
         <AppContextProvider>
-          <IonReactRouter>
-            <IonRouterOutlet>
-              <Route path="/home" component={Home} exact={true} />
-              <Route exact path="/" render={() => <Redirect to="/home" />} />
-            </IonRouterOutlet>
-          </IonReactRouter>
+          <IonSplitPane contentId="main">
+            <MenuPage />
+            <IonPage id="main">
+              <IonReactRouter>
+                <IonRouterOutlet>
+                  <Route path="/home" component={Home} exact />
+                  <Route path="/list" component={ListPage} exact />
+                  <Route path="/insert" component={InsertPage} exact />
+                  <Route path="/update/:idx" component={UpdatePage} exact />
+                  <Route path="/tabs" component={TabsPage} />
+                  <Route exact path="/" render={() => <Redirect to="/tabs/" />} />
+                </IonRouterOutlet>
+              </IonReactRouter>
+            </IonPage>
+          </IonSplitPane>
         </AppContextProvider>
       </IonApp>
     )

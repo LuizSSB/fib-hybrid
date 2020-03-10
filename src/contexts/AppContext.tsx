@@ -17,6 +17,8 @@ export interface AppDataAction {
         { type: 'delete', indexToDelete: number}
     ) | (
         { type: 'initialize', state: AppData }
+    ) | (
+        { type: 'update', at: number, to: string}
     )
 }
 
@@ -63,6 +65,18 @@ export const AppContextProvider: React.FC<React.PropsWithChildren<{}>> = ({
                 }
                 case 'initialize':
                     return action.state
+                case 'update': {
+                    const newNames = [...state.names]
+                    newNames[action.at] = action.to
+                    const newState = {
+                        ...state, names: newNames
+                    }
+                    Storage.set({
+                        key: 'appContext',
+                        value: JSON.stringify(state)
+                    })
+                    return newState
+                }
             }
         },
         DEFAULT_APPDATA

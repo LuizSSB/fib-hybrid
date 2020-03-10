@@ -1,4 +1,4 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButtons, IonMenuButton } from '@ionic/react';
 import React, { useState } from 'react';
 import NameSetter from '../components/NameSetter';
 import NameList from '../components/NameList';
@@ -10,6 +10,9 @@ const Home: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar color="primary">
+          <IonButtons slot="start">
+            <IonMenuButton />
+          </IonButtons>
           <IonTitle>Ionic Blank</IonTitle>
         </IonToolbar>
       </IonHeader>
