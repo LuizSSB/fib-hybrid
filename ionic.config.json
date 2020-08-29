@@ -1,0 +1,7 @@
+{
+  "name": "AulaFibHidrido",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
