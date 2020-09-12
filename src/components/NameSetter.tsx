@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
-import { IonInput, IonButton } from '@ionic/react'
+import React, { useRef, useState } from 'react'
+import { IonInput, IonButton, IonAlert } from '@ionic/react'
 
 export type NameSetterProps = {
   label: string
   placeholder: string
   buttonTitle?: string
+  onNameSave: (name: string) => void
 }
 
 function isValid(name: string): boolean {
@@ -27,10 +28,33 @@ function useValidName(
 }
 
 const NameSetter: React.FC<NameSetterProps> = ({
-  label, placeholder, buttonTitle
+  label, placeholder, buttonTitle, onNameSave
 }: NameSetterProps) => {
     const [name, setName, isValid] = useValidName(['luiz', 'fulano', 'ciclano'])
     console.log(name, isValid)
+    const [isNameEmptyAlertOpen, setNameEmptyAlertOpen] = useState(false)
+
+    const inputRef = useRef<HTMLIonInputElement>(null)
+
+    // const value: string | number | undefined = ''
+    // if (value !== undefined) {
+    //   console.log('value is defined')
+    // }
+
+    // var a: NameSetterClass//.. = 
+    // typeof a === 'object' // true
+    
+    const handleClick = () => {
+      if (!name?.trim()) {
+        setNameEmptyAlertOpen(true)
+        return
+      }
+      
+      onNameSave(name)
+      setName('')
+
+      inputRef.current?.setFocus()
+    }
 
     return (
       <div style={{
@@ -40,16 +64,32 @@ const NameSetter: React.FC<NameSetterProps> = ({
         <label htmlFor="edit_name">{label}: {name}</label>
         <br />
         <IonInput
+          ref={inputRef}
           type="text"
           id="edit_name"
           style={{ border: 'solid 1px black' }}
           placeholder={placeholder}
+          value={name}
           onIonChange={(e) => setName(e.detail.value ?? '')}
          />
         <br />
-        <IonButton onClick={() => alert('Seu nome é ' + name)}>
+        <IonButton onClick={handleClick}>
           Salvar {buttonTitle}
         </IonButton>
+        <IonAlert
+          isOpen={isNameEmptyAlertOpen}
+          onDidDismiss={() => setNameEmptyAlertOpen(false)}
+          header="Erro"
+          subHeader="subtitulo"
+          message={'<div height=123>nome<br />\n\n\n\nvazio</div>'}
+          buttons={[
+            "Fechar",
+            {
+              text: "Voltar para o campo",
+              handler: () => inputRef.current!.setFocus()
+            }
+          ]}
+        />
       </div>
     )
 }
