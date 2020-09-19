@@ -1,8 +1,9 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { IonInput, IonButton, IonAlert } from '@ionic/react'
 
 export type NameSetterProps = {
   label: string
+  initialValue?: string
   placeholder: string
   buttonTitle?: string
   onNameSave: (name: string) => void
@@ -28,10 +29,12 @@ function useValidName(
 }
 
 const NameSetter: React.FC<NameSetterProps> = ({
-  label, placeholder, buttonTitle, onNameSave
+  label, initialValue, placeholder, buttonTitle, onNameSave
 }: NameSetterProps) => {
-    const [name, setName, isValid] = useValidName(['luiz', 'fulano', 'ciclano'])
-    console.log(name, isValid)
+    const [name, setName, isValid] = useValidName(
+      ['luiz', 'fulano', 'ciclano'], initialValue
+    )
+    
     const [isNameEmptyAlertOpen, setNameEmptyAlertOpen] = useState(false)
 
     const inputRef = useRef<HTMLIonInputElement>(null)
@@ -43,6 +46,16 @@ const NameSetter: React.FC<NameSetterProps> = ({
 
     // var a: NameSetterClass//.. = 
     // typeof a === 'object' // true
+
+    useEffect(
+      () => {
+        setName(initialValue)
+        return () => {
+          console.log('indo embora', initialValue)
+        }
+      },
+      [initialValue]
+    )
     
     const handleClick = () => {
       if (!name?.trim()) {
