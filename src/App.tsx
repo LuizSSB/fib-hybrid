@@ -23,6 +23,9 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 import StartPage from './pages/StartPage';
+import { NamesContextProvider } from './contexts/NamesContext';
+import ListPage from './pages/ListPage';
+import AddPage from './pages/AddPage';
 
 class Stuff {
   meth() {
@@ -40,12 +43,16 @@ new Stuff().meth()
 
 const App: React.FC = () => (
   <IonApp>
-    <IonReactRouter>
-      <IonRouterOutlet>
-          <Route path="/home" component={Home} />
-          <Route exact path="/" component={StartPage} />
-      </IonRouterOutlet>
-    </IonReactRouter>
+    <NamesContextProvider>
+      <IonReactRouter>
+        <IonRouterOutlet>
+            <Route path="/home" component={Home} />
+            <Route exact path="/" component={ListPage} />
+            <Route exact path="/names" component={ListPage} />
+            <Route exact path="/names/add" component={AddPage} />
+        </IonRouterOutlet>
+      </IonReactRouter>
+    </NamesContextProvider>
   </IonApp>
 );
 
