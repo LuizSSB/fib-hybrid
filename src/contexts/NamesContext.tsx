@@ -121,6 +121,8 @@ export const NamesContextProvider: React.FC<React.PropsWithChildren<{}>> = ({
                     if (value) {
                         const names = JSON.parse(value) as string[]
                         reducer[1]({ type: 'initialize', names })
+                    } else {
+                        reducer[1]({ type: 'resetDialog' })
                     }
                 })
                 .catch(console.error),
