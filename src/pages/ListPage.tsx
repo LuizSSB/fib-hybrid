@@ -20,12 +20,12 @@ const ListPage: React.FC = () => {
                     <IonFabButton onClick={() => history.push('/names/add')}>+</IonFabButton>
                 </IonFab>
             </IonContent>
-            <IonContent>
+            {/* <IonContent>
                 <ContextualNameList />
                 <IonFab slot="fixed" horizontal="end" vertical="bottom">
                     <IonFabButton onClick={() => history.push('/names/add')}>+</IonFabButton>
                 </IonFab>
-            </IonContent>
+            </IonContent> */}
         </IonPage>
     )
 }

@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">AulaFibHidrido</string>
+    <string name="title_activity_main">AulaFibHidrido</string>
+    <string name="package_name">br.com.fib.aula</string>
+    <string name="custom_url_scheme">br.com.fib.aula</string>
+</resources>

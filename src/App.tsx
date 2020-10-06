@@ -26,6 +26,8 @@ import StartPage from './pages/StartPage';
 import { NamesContextProvider } from './contexts/NamesContext';
 import ListPage from './pages/ListPage';
 import AddPage from './pages/AddPage';
+import UpdatePage from './pages/UpdatePage';
+import NameDialogs from './components/NameDialogs';
 
 class Stuff {
   meth() {
@@ -45,11 +47,15 @@ const App: React.FC = () => (
   <IonApp>
     <NamesContextProvider>
       <IonReactRouter>
+        <Route path="/">
+          <NameDialogs />
+        </Route>
         <IonRouterOutlet>
             <Route path="/home" component={Home} />
             <Route exact path="/" component={ListPage} />
             <Route exact path="/names" component={ListPage} />
             <Route exact path="/names/add" component={AddPage} />
+            <Route exact path="/names/:userId/update" component={UpdatePage} />
         </IonRouterOutlet>
       </IonReactRouter>
     </NamesContextProvider>

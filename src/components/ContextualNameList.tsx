@@ -1,9 +1,11 @@
 import React, { useContext } from 'react'
+import { useHistory } from 'react-router'
 import { NamesContext } from '../contexts/NamesContext'
 import NameList from './NameList'
 
 const ContextualNameList: React.FC = () => {
     const [namesData, setNamesData] = useContext(NamesContext)
+    const history = useHistory()
 
     return (
         <NameList
@@ -11,7 +13,7 @@ const ContextualNameList: React.FC = () => {
             onDelete={(index) => setNamesData({
                 type: 'delete', indexToDelete: index
             })}
-            onEdit={() => {}}
+            onEdit={(index) => history.push(`/names/${index}/update`)}
             />
     )
 }
